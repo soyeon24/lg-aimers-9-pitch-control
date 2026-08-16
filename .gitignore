@@ -1,0 +1,14 @@
+# 대회 배포 데이터 (689MB) — Dacon에서 다시 받으면 됨
+open/data/
+
+# 평가 서버 호환 학습 환경 (339MB) — README의 명령으로 재생성
+.venv-submit/
+
+# 제출 zip — model/ + script.py 로 항상 재생성 가능
+submit.zip
+
+# 추론 산출물
+output/
+
+__pycache__/
+*.pyc
