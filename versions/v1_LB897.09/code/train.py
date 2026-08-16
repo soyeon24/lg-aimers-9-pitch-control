@@ -19,7 +19,7 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import HistGradientBoostingClassifier
 
-from features import CAT_COLS, TARGET_COL, build_features, compute_priors
+from features import CAT_COLS, TARGET_COL, build_features
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TRAIN_CSV = os.path.join(HERE, "..", "open", "data", "train.csv")
@@ -93,9 +93,7 @@ def main():
     print(f"시즌별 성공률 {dict(zip(seasons, rates.round(4)))}")
     print(f"→ {last_season + 1} 외삽 성공률 = {target_rate:.4f}")
 
-    priors = compute_priors(tr)
-    print("priors =", {k: round(v, 4) for k, v in priors.items()})
-    Xtr = build_features(tr, priors)
+    Xtr = build_features(tr)
     ytr = tr[TARGET_COL].values
     columns = list(Xtr.columns)
     cat_idx = [columns.index(c) for c in CAT_COLS]
@@ -111,12 +109,12 @@ def main():
     print(f"기준({last_season}) 예측 평균 = {ref_mean:.4f} → logit_offset = {logit_offset:+.4f}")
 
     artifact = dict(models=models, columns=columns, cat_idx=cat_idx,
-                    logit_offset=logit_offset, target_rate=target_rate, priors=priors,
+                    logit_offset=logit_offset, target_rate=target_rate,
                     ref_mean=ref_mean, trained_seasons=seasons, params=PARAMS,
                     seeds=SEEDS)
 
     if args.validate:
-        Xva = build_features(va, priors, columns)
+        Xva = build_features(va, columns)
         yva = va[TARGET_COL].values
         raw = predict_raw(models, Xva)
         adj = sigmoid(logit(raw) + logit_offset)

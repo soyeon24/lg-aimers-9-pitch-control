@@ -33,46 +33,13 @@ MODEL_PATH = "./model/model.joblib"
 OUT_PATH = "./output/submission.csv"
 
 
-def build_features(df, priors, columns):
-    """work/features.py 의 build_features 와 반드시 동일해야 한다.
-
-    모든 파생값은 해당 행 하나만으로 계산되고, priors(리그 평균)는 학습 데이터에서
-    구해 모델에 저장해둔 상수다. 평가 데이터의 통계는 쓰지 않는다.
-    """
+def build_features(df, columns):
     X = df.drop(columns=[c for c in (ID_COL, TARGET_COL) if c in df.columns]).copy()
     for col, mapping in CAT_MAPS.items():
         X[col] = X[col].astype(str).map(mapping).astype("float64")
-
-    b, s = X["balls_before"], X["strikes_before"]
-    X["count_state"] = (b * 3 + s).astype("float64")
-    X["count_diff"] = (s - b).astype("float64")
-    X["two_strikes"] = (s == 2).astype("float64")
-    X["three_balls"] = (b == 3).astype("float64")
-    X["full_count"] = ((b == 3) & (s == 2)).astype("float64")
-    X["first_pitch"] = ((b == 0) & (s == 0)).astype("float64")
-    X["pitcher_ahead"] = (s > b).astype("float64")
-    X["must_strike"] = ((b == 3) & (s < 2)).astype("float64")
-    X["can_waste"] = ((s == 2) & (b < 2)).astype("float64")
-
-    X["same_hand"] = (X["pitcher_hand"] == X["batter_hand"]).astype("float64")
-    X["risp"] = ((X["runner_on_2b"] == 1) | (X["runner_on_3b"] == 1)).astype("float64")
-    X["bases_loaded"] = (X["num_runners_on"] == 3).astype("float64")
-    X["close_game"] = (X["score_diff_pitcher_team"].abs() <= 1).astype("float64")
-    X["blowout"] = (X["score_diff_pitcher_team"].abs() >= 5).astype("float64")
-    X["late_inning"] = (X["inning"] >= 7).astype("float64")
-    X["log_li"] = np.log1p(X["li"])
-
-    base_s = X["asof_pitcher_success_rate"].fillna(priors["success"])
-    base_m = X["asof_pitcher_middle_rate"].fillna(priors["middle"])
-    for w in (1, 3, 5):
-        X[f"form{w}_success"] = X[f"asof_pitcher_prev{w}_game_success_rate"] - base_s
-        X[f"form{w}_middle"] = X[f"asof_pitcher_prev{w}_game_middle_rate"] - base_m
-    X["form_trend"] = (X["asof_pitcher_prev1_game_success_rate"]
-                       - X["asof_pitcher_prev5_game_success_rate"])
-
     missing = [c for c in columns if c not in X.columns]
     if missing:
-        raise ValueError(f"test 데이터로 만들 수 없는 학습 피처: {missing}")
+        raise ValueError(f"test 데이터에 없는 학습 피처: {missing}")
     return X[list(columns)]
 
 
