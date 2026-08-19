@@ -48,7 +48,10 @@ def main():
         raise SystemExit(f"[FAIL] 전처리 불일치 컬럼: {bad}")
     print(f"[OK] 전처리 일치 - {len(columns)}개 피처 × {len(df)}행 완전 동일")
 
-    p = np.mean([m.predict_proba(a)[:, 1] for m in art["models"]], axis=0)
+    w = art["blend_w"]
+    pa = np.mean([m.predict_proba(a)[:, 1] for m in art["models_a"]], axis=0)
+    pb = np.mean([m.predict_proba(a)[:, 1] for m in art["models_b"]], axis=0)
+    p = (1 - w) * pa + w * pb
     z = np.log(p / (1 - p)) + art["logit_offset"]
     p = 1 / (1 + np.exp(-z))
     print(f"[OK] 예측 정상 - mean={p.mean():.4f} min={p.min():.4f} max={p.max():.4f}")
