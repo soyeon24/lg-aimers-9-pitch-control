@@ -9,3 +9,19 @@ output/
 
 __pycache__/
 *.pyc
+
+# 랩 캐시 (200MB+) — work/lab/00_cache.py 로 재생성
+work/lab/cache/
+
+# 학습 중간 산출물 — train_nn.py --validate 로 재생성
+work/nn_weights_validate.npz
+
+# 중간 버전(v4~v6)의 모델 바이너리.
+# 재현은 각 버전의 code/ 와 work/train_v4.py 로 가능하다.
+# v1~v3은 이미 커밋돼 있고, 최종 v7은 submit/ 과 versions/v7/ 에 들어간다.
+versions/v4_LB947.49/model/
+versions/v4_LB947.49/submit.zip
+versions/v5_LB985.27/model/
+versions/v5_LB985.27/submit.zip
+versions/v6_LB998.53/model/
+versions/v6_LB998.53/submit.zip
