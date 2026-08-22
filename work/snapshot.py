@@ -33,13 +33,14 @@ def main():
 
     os.makedirs(os.path.join(dst, "code"))
     shutil.copytree(os.path.join(ROOT, "submit", "model"), os.path.join(dst, "model"))
-    for src, name in [
-        (os.path.join(ROOT, "submit", "script.py"), "script.py"),
-        (os.path.join(ROOT, "submit", "requirements.txt"), "requirements.txt"),
-        (os.path.join(HERE, "train.py"), "train.py"),
-        (os.path.join(HERE, "features.py"), "features.py"),
-    ]:
-        shutil.copy2(src, os.path.join(dst, "code", name))
+    code = [os.path.join(ROOT, "submit", "script.py"),
+            os.path.join(ROOT, "submit", "requirements.txt")]
+    code += [os.path.join(HERE, n) for n in
+             ("fe.py", "nnpred.py", "forecast.py", "train_v4.py", "train_nn.py",
+              "build_submit.py", "verify_v4.py", "train.py", "features.py")]
+    for src in code:
+        if os.path.exists(src):
+            shutil.copy2(src, os.path.join(dst, "code", os.path.basename(src)))
 
     zip_path = os.path.join(ROOT, "submit.zip")
     if os.path.exists(zip_path):
