@@ -1,0 +1,16 @@
+[load] (1475092, 49) 0.2s
+===== holdout 2024, 2 seeds =====
+  [Aprod f=107 277s]
+  Aprod      alone   all   869.8 R   866.1 F   571.7   (tight   860.7 loose   846.1)
+  [Bprod f=135 337s]
+  Bprod      alone   all   875.5 R   869.1 F   600.3   (tight   870.9 loose   841.7)
+
+--- A averaged with each other view ---
+  A + 0.3*Bprod     all   880.9 R   875.9 F   593.0
+  A + 0.4*Bprod     all   882.8 R   877.5 F   597.7
+  A + 0.5*Bprod     all   883.8 R   878.2 F   601.2
+  A + 0.6*Bprod     all   883.9 R   878.1 F   603.4
+
+--- three views ---
+
+done

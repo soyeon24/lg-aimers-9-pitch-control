@@ -1,0 +1,35 @@
+train.csv (1475092, 49) (13s)
+  R [0.5495, 0.5269, 0.5128, 0.5037, 0.5031, 0.4897] -> 0.4787 (d=-0.0110)
+  F [0.6892, 0.5878, 0.7038, 0.7087, 0.4729, 0.4593] -> 0.4470
+  F share 0.1184 -> blended 0.4749
+seasons [2019, 2020, 2021, 2022, 2023, 2024]  last-season rate 0.4861
+forecast 2025 = 0.4749  -> applied at 0.85 = 0.4766
+features (1475092, 135) (8s)  view A 107 / view B 135
+  tightA seed 0 (162s)
+  tightA seed 1 (187s)
+  tightA seed 2 (159s)
+  tightA seed 3 (134s)
+  looseA seed 0 (146s)
+  looseA seed 1 (151s)
+  looseA seed 2 (149s)
+  looseA seed 3 (74s)
+  tightB seed 0 (85s)
+  tightB seed 1 (88s)
+  tightB seed 2 (90s)
+  tightB seed 3 (86s)
+  looseB seed 0 (93s)
+  looseB seed 1 (93s)
+  looseB seed 2 (95s)
+  looseB seed 3 (89s)
+  nn: 4 nets from nn_weights.npz (weight 0.35)
+  f_spec leaf31 seed 0 (10s, 161004 rows)
+  f_spec leaf31 seed 1 (10s, 161004 rows)
+  f_spec leaf31 seed 2 (10s, 161004 rows)
+  f_spec leaf31 seed 3 (10s, 161004 rows)
+  f_spec leaf15 seed 0 (8s, 161004 rows)
+  f_spec leaf15 seed 1 (8s, 161004 rows)
+  f_spec leaf15 seed 2 (8s, 161004 rows)
+  f_spec leaf15 seed 3 (8s, 161004 rows)
+reference mean on 2024 = 0.4881 -> logit_offset = -0.0462
+
+saved C:\school\26summer\lgaimer\work\..\submit\model\model.joblib (15.8 MB, total 2073s)

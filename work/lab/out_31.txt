@@ -1,0 +1,74 @@
+[load] (1475092, 49) 0.6s
+
+===== holdout 2024 =====  train 1221585 rows, 107 features (4s)
+  anchor bias by season (mean anchor - true rate), K=100
+    2020  0.5410 vs 0.5327   +0.0083
+    2021  0.5394 vs 0.5328   +0.0066
+    2022  0.5345 vs 0.5289   +0.0056
+    2023  0.5173 vs 0.5000   +0.0173
+    learned bias constant  +0.0095  (spread 0.0046)
+  K sweep on the holdout (bias-corrected anchor mean vs true 0.4861):
+    K=    0  mean 0.4942  off by +0.0081
+    K=   30  mean 0.4986  off by +0.0125
+    K=  100  mean 0.5030  off by +0.0169
+    K=  200  mean 0.5064  off by +0.0203
+  forecast 0.4872 -> applied 0.4891  (off by +0.0030)
+  [classifier 83s]
+  clf_none       811.7  oracle    855.9  mean 0.4966 (true 0.4861, off by +0.0105)
+  clf_fc         855.9  oracle    855.9  mean 0.4862 (true 0.4861, off by +0.0001)
+  [regressor 127s]
+  reg_plain      805.9  oracle    852.0  mean 0.4968 (true 0.4861, off by +0.0107)
+  anchor         316.2  oracle    430.8  mean 0.5030 (true 0.4861, off by +0.0169)
+  [offset regressor 154s]
+  reg_off        811.2  oracle    854.6  mean 0.4965 (true 0.4861, off by +0.0104)
+  reg_off_fc     854.6  oracle    854.6  mean 0.4860 (true 0.4861, off by -0.0001)
+
+===== holdout 2022 =====  train 728588 rows, 107 features (8s)
+  anchor bias by season (mean anchor - true rate), K=100
+    2020  0.5456 vs 0.5327   +0.0129
+    2021  0.5441 vs 0.5328   +0.0114
+    learned bias constant  +0.0121  (spread 0.0008)
+  K sweep on the holdout (bias-corrected anchor mean vs true 0.5289):
+    K=    0  mean 0.5254  off by -0.0036
+    K=   30  mean 0.5262  off by -0.0027
+    K=  100  mean 0.5271  off by -0.0019
+    K=  200  mean 0.5277  off by -0.0012
+  forecast 0.5154 -> applied 0.5180  (off by -0.0109)
+  [classifier 126s]
+  clf_none      2355.8  oracle   2355.9  mean 0.5293 (true 0.5289, off by +0.0003)
+  clf_fc        2281.0  oracle   2355.9  mean 0.5152 (true 0.5289, off by -0.0137)
+  [regressor 68s]
+  reg_plain     2354.4  oracle   2354.4  mean 0.5289 (true 0.5289, off by +0.0000)
+  anchor        1181.5  oracle   1182.5  mean 0.5271 (true 0.5289, off by -0.0019)
+  [offset regressor 93s]
+  reg_off       2355.6  oracle   2355.7  mean 0.5286 (true 0.5289, off by -0.0003)
+  reg_off_fc    2270.7  oracle   2355.6  mean 0.5146 (true 0.5289, off by -0.0143)
+
+===== holdout 2021 =====  train 481500 rows, 107 features (3s)
+  anchor bias by season (mean anchor - true rate), K=100
+    2020  0.5440 vs 0.5327   +0.0113
+    learned bias constant  +0.0113  (spread 0.0000)
+  K sweep on the holdout (bias-corrected anchor mean vs true 0.5328):
+    K=    0  mean 0.5309  off by -0.0019
+    K=   30  mean 0.5309  off by -0.0018
+    K=  100  mean 0.5311  off by -0.0016
+    K=  200  mean 0.5313  off by -0.0014
+  forecast 0.5026 -> applied 0.5072  (off by -0.0256)
+  [classifier 92s]
+  clf_none      1519.5  oracle   1552.5  mean 0.5233 (true 0.5328, off by -0.0094)
+  clf_fc        1069.0  oracle   1552.5  mean 0.4978 (true 0.5328, off by -0.0350)
+  [regressor 38s]
+  reg_plain     1519.6  oracle   1556.4  mean 0.5228 (true 0.5328, off by -0.0099)
+  anchor         891.9  oracle    892.8  mean 0.5311 (true 0.5328, off by -0.0016)
+  [offset regressor 54s]
+  reg_off       1589.1  oracle   1613.7  mean 0.5245 (true 0.5328, off by -0.0082)
+  reg_off_fc    1163.9  oracle   1613.8  mean 0.4990 (true 0.5328, off by -0.0338)
+
+===== summary (score / oracle) =====
+arm                      2024               2022               2021
+clf_none       811.7/   855.9    2355.8/  2355.9    1519.5/  1552.5
+clf_fc         855.9/   855.9    2281.0/  2355.9    1069.0/  1552.5
+reg_plain      805.9/   852.0    2354.4/  2354.4    1519.6/  1556.4
+anchor         316.2/   430.8    1181.5/  1182.5     891.9/   892.8
+reg_off        811.2/   854.6    2355.6/  2355.7    1589.1/  1613.7
+reg_off_fc     854.6/   854.6    2270.7/  2355.6    1163.9/  1613.8

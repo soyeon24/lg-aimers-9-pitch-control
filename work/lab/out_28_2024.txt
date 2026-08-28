@@ -1,0 +1,31 @@
+[load] (1475092, 49) 0.2s
+===== holdout 2024, 4 seeds =====
+  [A_base f=107 505s]
+  A_base     alone   all   869.5 R   864.8 F   579.3   (tight   860.9 loose   849.8)
+  [B_full f=135 648s]
+  B_full     alone   all   878.0 R   870.4 F   613.2   (tight   873.8 loose   849.1)
+  [C_count f=110 798s]
+  C_count    alone   all   871.0 R   866.2 F   582.1   (tight   863.8 loose   847.2)
+  [D_regime f=126 836s]
+  D_regime   alone   all   865.7 R   853.3 F   635.7   (tight   860.4 loose   837.9)
+
+--- A averaged with each other view ---
+  A + 0.3*B_full    all   880.6 R   874.6 F   601.3
+  A + 0.4*B_full    all   882.7 R   876.3 F   606.3
+  A + 0.5*B_full    all   884.0 R   877.2 F   610.3
+  A + 0.6*B_full    all   884.4 R   877.4 F   613.1
+  A + 0.3*C_count   all   871.5 R   866.8 F   581.6
+  A + 0.4*C_count   all   871.9 R   867.2 F   582.1
+  A + 0.5*C_count   all   872.1 R   867.4 F   582.4
+  A + 0.6*C_count   all   872.2 R   867.5 F   582.6
+  A + 0.3*D_regime  all   872.6 R   864.8 F   606.0
+  A + 0.4*D_regime  all   872.9 R   864.2 F   613.0
+  A + 0.5*D_regime  all   872.7 R   863.2 F   619.1
+  A + 0.6*D_regime  all   872.1 R   861.9 F   624.3
+
+--- three views ---
+  A+B+D    all   880.9 R   872.1 F   622.9
+  A+C+D    all   874.5 R   866.4 F   610.4
+  A+B+C    all   882.6 R   876.4 F   604.7
+
+done

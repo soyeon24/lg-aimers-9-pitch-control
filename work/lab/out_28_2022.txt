@@ -1,0 +1,16 @@
+[load] (1475092, 49) 0.7s
+===== holdout 2022, 2 seeds =====
+  [A_base f=107 244s]
+  A_base     alone   all  2361.7 R   637.6 F     0.0   (tight  2365.3 loose  2297.9)
+  [B_full f=135 291s]
+  B_full     alone   all  2358.4 R   650.3 F     0.0   (tight  2357.6 loose  2291.7)
+
+--- A averaged with each other view ---
+  A + 0.3*B_full    all  2372.2 R   651.6 F     0.0
+  A + 0.4*B_full    all  2373.5 R   654.3 F     0.0
+  A + 0.5*B_full    all  2373.7 R   656.1 F     0.0
+  A + 0.6*B_full    all  2372.8 R   656.9 F     0.0
+
+--- three views ---
+
+done

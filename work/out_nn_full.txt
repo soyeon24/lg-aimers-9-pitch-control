@@ -1,0 +1,20 @@
+train rows (1475092, 49) (5s)
+nn input (1475092, 176)
+  net seed 0
+    ep  0 logloss 0.68497
+    ep  2 logloss 0.68207
+  net seed 0 done (12s)
+  net seed 1
+    ep  0 logloss 0.68479
+    ep  2 logloss 0.68211
+  net seed 1 done (14s)
+  net seed 2
+    ep  0 logloss 0.68464
+    ep  2 logloss 0.68213
+  net seed 2 done (14s)
+  net seed 3
+    ep  0 logloss 0.68497
+    ep  2 logloss 0.68214
+  net seed 3 done (14s)
+
+saved C:\school\26summer\lgaimer\work\nn_weights.npz (1.2 MB, total 67s)

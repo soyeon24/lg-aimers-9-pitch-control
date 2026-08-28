@@ -1,0 +1,3 @@
+wrote C:\school\26summer\lgaimer\submit\script.py
+wrote C:\school\26summer\lgaimer\submit.zip (15.76 MB)
+  contents: ['script.py', 'requirements.txt', 'model/model.joblib']

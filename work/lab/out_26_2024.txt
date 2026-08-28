@@ -1,0 +1,8 @@
+[load] (1475092, 49) 0.2s
+===== holdout 2024 =====
+  baseline v6                f=107 | all   869.8 R   866.1 F   571.7 | tight   860.7 loose   846.1 (277s)
+  regime                     f=126 | all   868.2 R   856.1 F   636.4 | tight   860.7 loose   838.5 (323s)
+  regime+platoon             f=132 | all   868.2 R   859.8 F   609.5 | tight   855.7 loose   847.3 (325s)
+  regime+platoon+count       f=135 | all   875.5 R   869.1 F   600.3 | tight   870.9 loose   841.7 (337s)
+
+done

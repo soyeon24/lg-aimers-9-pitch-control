@@ -1,0 +1,19 @@
+numpy 1.26.4 / pandas 2.2.3
+[OK] artifact loads (15.8 MB, 2.5s), tightA x4 w=0.211 + looseA x4 w=0.114 + tightB x4 w=0.211 + looseB x4 w=0.114 + nn x4 w=0.350 + f_spec x8 w=0.25, 135 features
+[OK] script.py matches fe.py on 20000 rows x 135 features
+[OK] net inference matches (4 nets, mean=0.5432) -- numpy only, no torch on the server
+--- script.py stdout ---
+model: tightA x4 w=0.211 + looseA x4 w=0.114 + tightB x4 w=0.211 + looseB x4 w=0.114 + nn x4 w=0.350, 135 features, logit_offset=-0.0462 (1.8s)
+test=250000 submission=250000 (2.6s)
+  tightA: mean=0.4607 weight=0.211 (21.3s)
+  looseA: mean=0.4642 weight=0.114 (36.7s)
+  tightB: mean=0.4645 weight=0.211 (54.6s)
+  looseB: mean=0.4777 weight=0.114 (72.8s)
+  nn: mean=0.4556 weight=0.350 (82.2s)
+  f_spec: 30010 F rows, mean=0.4515 weight=0.25 (85.0s)
+predicted mean=0.4507 min=0.3351 max=0.5528 (85.0s)
+wrote ./output/submission.csv rows=250000 (total 85.4s)
+[OK] 250000 rows, mean=0.4507, range [0.3351, 0.5528]
+[OK] wall clock 86.3s for 250000 rows (limit 600s)
+
+applied target 0.4766 (forecast 0.4749 at 0.85 strength, reference 0.4881)

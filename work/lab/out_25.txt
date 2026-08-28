@@ -1,0 +1,21 @@
+[load] (1475092, 49) 1.1s
+base   892.4
+
+--- row-bootstrap bagging ---
+  bagged leaf15 x4 (259s)          alone   828.6
+    on top of base: w=0.1:  889.8  w=0.2:  886.4  w=0.3:  882.1
+
+--- extremely randomised trees ---
+  extratrees depth12 msl2000 n80 (69s) alone   613.7
+    on top of base: w=0.1:  890.0  w=0.2:  881.9  w=0.3:  868.1
+  extratrees depth20 msl5000 n80 (63s) alone   544.6
+    on top of base: w=0.1:  888.7  w=0.2:  878.0  w=0.3:  860.5
+
+--- sequential stack: GBM on the blend's residual ---
+  [in-sample blend rebuilt 178s]
+  [residual model 26s]
+    base + 0.25 * residual:   891.2
+    base + 0.5 * residual:   888.8
+    base + 1.0 * residual:   880.1
+
+done

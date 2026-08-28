@@ -1,0 +1,29 @@
+train.csv (1475092, 49) (4s)
+  R [0.5495, 0.5269, 0.5128, 0.5037, 0.5031] -> 0.4904 (d=-0.0127)
+  F [0.6892, 0.5878, 0.7038, 0.7087, 0.4729] -> 0.4602
+  F share 0.1046 -> blended 0.4872
+seasons [2019, 2020, 2021, 2022, 2023]  last-season rate 0.5000
+forecast 2024 = 0.4872  -> applied at 0.85 = 0.4891
+features (1221585, 135) (2s)  view A 107 / view B 135
+  tightA seed 0 (66s)
+  tightA seed 1 (65s)
+  looseA seed 0 (69s)
+  looseA seed 1 (69s)
+  tightB seed 0 (80s)
+  tightB seed 1 (80s)
+  looseB seed 0 (83s)
+  looseB seed 1 (83s)
+  nn: 4 nets from nn_weights_validate.npz (weight 0.35)
+  f_spec leaf31 seed 0 (10s, 130994 rows)
+  f_spec leaf31 seed 1 (10s, 130994 rows)
+  f_spec leaf15 seed 0 (8s, 130994 rows)
+  f_spec leaf15 seed 1 (8s, 130994 rows)
+reference mean on 2023 = 0.4993 -> logit_offset = -0.0409
+
+=== 2024 holdout ===
+true rate 0.4861 | forecast 0.4872 | applied 0.4891 | achieved 0.4879
+model's own drift = -0.0013 (true drift -0.0139)
+score               917.6
+  R rows only       909.2
+  F rows only       654.8
+oracle mean         918.9   (calibration-free ceiling)

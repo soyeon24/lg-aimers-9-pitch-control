@@ -1,0 +1,15 @@
+[load] (1475092, 49) 0.2s
+===== holdout 2024, 2 seeds =====
+  Aprod      alone   all   869.8 R   866.1 F   571.7   (tight   860.7 loose   846.1)
+  [Bnoshare f=131 415s]
+  Bnoshare   alone   all   879.2 R   876.0 F   580.1   (tight   866.4 loose   857.3)
+
+--- A averaged with each other view ---
+  A + 0.3*Bnoshare  all   881.9 R   877.9 F   586.1
+  A + 0.4*Bnoshare  all   884.2 R   880.2 F   588.6
+  A + 0.5*Bnoshare  all   885.5 R   881.6 F   590.0
+  A + 0.6*Bnoshare  all   886.0 R   882.2 F   590.3
+
+--- three views ---
+
+done

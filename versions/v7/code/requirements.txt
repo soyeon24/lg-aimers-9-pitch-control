@@ -1,0 +1,3 @@
+# intentionally empty: the evaluation image already ships numpy,
+# pandas, scikit-learn and joblib. Pinning anything here only adds
+# a way for the install step to fail.

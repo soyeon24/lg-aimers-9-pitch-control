@@ -1,0 +1,16 @@
+[load] (1475092, 49) 0.2s
+===== holdout 2021, 2 seeds =====
+  [Aprod f=107 143s]
+  Aprod      alone   all  1536.5 R   510.9 F   209.0   (tight  1574.9 loose  1383.1)
+  [Bprod f=135 182s]
+  Bprod      alone   all  1442.2 R   478.4 F   281.8   (tight  1471.4 loose  1307.8)
+
+--- A averaged with each other view ---
+  A + 0.3*Bprod     all  1522.8 R   513.6 F   255.0
+  A + 0.4*Bprod     all  1515.4 R   512.1 F   265.7
+  A + 0.5*Bprod     all  1506.7 R   509.5 F   274.1
+  A + 0.6*Bprod     all  1496.6 R   505.6 F   280.1
+
+--- three views ---
+
+done
