@@ -1,5 +1,6 @@
-# 대회 배포 데이터 (689MB) — Dacon에서 다시 받으면 됨
-open/data/
+# 대회 배포물 전체 — 제3자(Dacon/LG Aimers) 자료라 재배포하지 않는다.
+# data/ (689MB) · data_description.md · baseline_submit/ 모두 대회 페이지에서 받을 것.
+open/
 
 # 평가 서버 호환 학습 환경 (339MB) — README의 명령으로 재생성
 .venv-submit/

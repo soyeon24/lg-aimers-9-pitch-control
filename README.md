@@ -14,8 +14,10 @@ as per-row discrimination. But training is 2019–2024 while evaluation is 2025,
 success rate falls every year — half of this problem is drift correction, not resolution
 (see [The shape of this problem](#the-shape-of-this-problem)).
 
-**Public leaderboard 897.09 → 998.53** (v1 → v6, submitted).
-v7 reached 917.6 on the 2024 holdout and was the last candidate before the deadline.
+**Final public leaderboard 998.53 — 437th of 1,087**, up from 897.09 at v1.
+The final score is v6's. v7 was submitted before the deadline and did not beat it, which
+makes it the one time in this project that a holdout gain failed to transfer at all — see
+[How v7 ended](#how-v7-ended).
 
 Throughout: **R** is `game_type` R, the top-tier KBO league; **F** is Futures, the
 second-tier development league (12% of rows).
@@ -33,7 +35,7 @@ reasoning in full.
 | [v4](versions/v4_LB947.49) | 08-22 | **947.49** | 855.9 | **Season-to-date reconstruction** + Futures regime isolation + segmented forecast |
 | [v5](versions/v5_LB985.27) | 08-22 | **985.27** | 890.0 | Small MLP blend (w=0.35) + two tree capacities |
 | [v6](versions/v6_LB998.53) | 08-22 | **998.53** | 895.6 | Futures-only model blended at 25%, on Futures rows only |
-| [v7](versions/v7) | 08-29 | not submitted | **917.6** | Blend two feature views (107 and 135 columns) |
+| [v7](versions/v7) | 08-29 | no gain | **917.6** | Blend two feature views (107 and 135 columns) |
 
 v4 replaced the holdout harness, so v3 has two recorded scores — 770.2 on the old harness,
 768.6 on the new one. The table shows the old value; the transfer table below uses the new one.
@@ -50,9 +52,12 @@ reached the leaderboard varied wildly.
 | v3 → v4 | +87.3 | +24.6 | 28% |
 | v4 → v5 | +34.1 | +37.8 | 111% |
 | v5 → v6 | +5.6 | +13.3 | 237% |
+| v6 → v7 | +22.0 | none | **0%** |
 
-From 20% to 330%. **The ratio is unusable, but the sign was right all five times.**
-So the holdout was used only for accept/reject decisions, never to predict a score.
+From 20% to 330%, and then zero. **The ratio was never usable, and on the last step the
+sign failed too.** For five rounds the holdout got the direction right and only the
+magnitude wrong, which is why it was used for accept/reject decisions and never to predict
+a score. v7 is the round where even that broke.
 
 There is a reason transfer exceeded 100% at v5 and v6 — **the 2024 holdout structurally
 underrates F.** The holdout model sees only one season (2023) of the new F regime, while
@@ -78,9 +83,29 @@ residual stacking all landed below baseline — and what they had in common was 
 **every one of them changed the model on top of the same feature table.** Splitting the
 feature table in two showed that axis was not saturated at all.
 
-## v7 status
+## How v7 ended
 
-Training, packaging, and the evaluation-server rehearsal are all complete.
+v7 was submitted before the 2026-09-01 deadline and **did not improve on v6.** The exact
+score was not recorded; v6's 998.53 remained the best and is the final public result. The
+2024 holdout had said +22.0.
+
+That is worth stating plainly, because this README spends its first screen arguing that the
+holdout's sign can be trusted even when its magnitude cannot. Five rounds supported that.
+The sixth did not. Anyone reading the v7 section below should read it as a well-measured
+change that did not survive contact with the real evaluation set.
+
+Two candidate explanations, neither verified:
+
+- **The 2024 holdout has five training seasons; 2025 has six.** Every constant in v7 —
+  the 0.5 view mix, the 0.35 net weight, the 0.25 F weight — was chosen on 2024 and
+  confirmed on 2022. The section below already notes that 2021, with only two training
+  seasons, disagreed by −29.8. The regime that made 2021 disagree may not have fully
+  disappeared by 2025.
+- **View B's gain concentrated in F, and F is 12% of rows.** The F transfer rate had been
+  the highest of anything in the project (237% at v6), and that pattern may simply have run
+  out.
+
+What did verify: training, packaging, and the evaluation-server rehearsal all passed.
 
 ```
 [OK] artifact loads (15.8 MB), tightA x4 + looseA x4 + tightB x4 + looseB x4
@@ -98,7 +123,7 @@ The rehearsal's `predicted mean` is not a calibration preview. `verify_v4.py` ta
 end-of-2024 asof counters, so every season-to-date feature collapses to zero. It checks
 format, timing, and crashes — nothing else.
 
-Evidence that it is verified:
+What the holdout and the rehearsal did establish:
 - 2024 holdout end-to-end 917.6 (2 seeds), +21.9 over v6's 895.6
 - On 2022, every constant (view mix 0.5, net on view B, F-specialist w=0.25) peaks in the
   same place
@@ -114,11 +139,25 @@ Evidence that it is verified:
   `work/lab/00`–`31`
 - **Reproducing** — [Usage](#usage)
 
-The data (`open/data/`, 689 MB) and the lab cache (`work/lab/cache/`) are not in the
-repository. Download the former from the competition page; regenerate the latter with
-`work/lab/00_cache.py`. Model binaries for the intermediate versions (v4–v6) are also
-excluded — each is reproducible from that version's `code/` plus `train_v4.py`. The final
-v7 artifact is included, in `submit/` and `versions/v7/`.
+### Competition materials are not redistributed here
+
+Everything under `open/` — the competition data (689 MB), the official data description,
+and the provided baseline submission — is third-party material from Dacon / LG Aimers. It
+is excluded from this repository and purged from its history, not merely untracked. Get it
+from the [competition page](https://dacon.io/competitions/official/236743); the code here
+expects it at `open/data/`.
+
+The lab cache (`work/lab/cache/`) is also excluded — regenerate it with
+`work/lab/00_cache.py`. Model binaries for the intermediate versions (v4–v6) are excluded
+too; each is reproducible from that version's `code/` plus `train_v4.py`. The final v7
+artifact is included, in `submit/` and `versions/v7/`.
+
+### License
+
+The code in this repository is MIT licensed ([LICENSE](LICENSE)). That covers this
+repository's own code and write-ups only — it does not extend to the competition data,
+documents, or baseline described above, which are not distributed here and remain under
+their owners' terms.
 
 ## The shape of this problem
 
@@ -602,7 +641,8 @@ packages makes the risk of an install error zero.
 ## Layout
 
 ```
-open/                     competition distribution (data/ excluded from git, 689MB)
+open/                     competition distribution -- entirely excluded from git,
+                          see "Competition materials are not redistributed here"
 work/
   fe.py                   feature engineering — the single source shared by
                           training, validation, and submission.
@@ -668,8 +708,9 @@ KBO 투구 한 건이 "제구 성공"일 확률을 예측한다. 2019~2024 시�
 그런데 학습은 2019~2024이고 평가는 2025인데 성공률이 매년 떨어진다 — 이 문제의 절반은
 해상도가 아니라 드리프트 보정이다 (아래 [이 문제의 구조](#이-문제의-구조)).
 
-**리더보드 Public 897.09 → 998.53** (v1 → v6, 제출 기준).
-v7은 2024 홀드아웃 917.6까지 올렸고 제출 마감 전 마지막 후보였다.
+**최종 리더보드 Public 998.53 — 1,087명 중 437위.** v1의 897.09에서 올라온 값이다.
+최종 점수는 v6의 것이다. v7은 마감 전에 제출했지만 v6을 넘지 못했고, 이 프로젝트에서
+홀드아웃 이득이 전혀 전이되지 않은 유일한 사례가 됐다 — [v7은 어떻게 끝났나](#v7은-어떻게-끝났나) 참고.
 
 ## 버전 발전사
 
@@ -683,7 +724,7 @@ v7은 2024 홀드아웃 917.6까지 올렸고 제출 마감 전 마지막 후보
 | [v4](versions/v4_LB947.49) | 08-22 | **947.49** | 855.9 | **시즌 누적 성적 복원** + 2군 레짐 격리 + 세그먼트 예보 |
 | [v5](versions/v5_LB985.27) | 08-22 | **985.27** | 890.0 | 소형 MLP 블렌딩(w=0.35) + 트리 용량 2종 |
 | [v6](versions/v6_LB998.53) | 08-22 | **998.53** | 895.6 | F(2군) 전용 모델을 F 행에만 25% 블렌딩 |
-| [v7](versions/v7) | 08-29 | 미제출 | **917.6** | 피처 뷰 2벌(107·135컬럼) 블렌딩 |
+| [v7](versions/v7) | 08-29 | 개선 없음 | **917.6** | 피처 뷰 2벌(107·135컬럼) 블렌딩 |
 
 v4에서 홀드아웃 하네스를 갈아서 v3 점수가 두 번 찍힌다 — 구 하네스 770.2, 신 하네스 768.6.
 표의 v3은 구 하네스 값이고, 아래 전이율 표는 신 하네스 기준이다.
@@ -700,9 +741,11 @@ v4에서 홀드아웃 하네스를 갈아서 v3 점수가 두 번 찍힌다 — 
 | v3 → v4 | +87.3 | +24.6 | 28% |
 | v4 → v5 | +34.1 | +37.8 | 111% |
 | v5 → v6 | +5.6 | +13.3 | 237% |
+| v6 → v7 | +22.0 | 없음 | **0%** |
 
-20%에서 330%까지 흩어진다. **비율은 못 쓰지만 부호는 다섯 번 다 맞았다.**
-그래서 홀드아웃은 채택/기각 판정에만 쓰고 점수 예측에는 쓰지 않았다.
+20%에서 330%까지 흩어지다가 마지막에 0이 됐다. **비율은 처음부터 못 쓸 물건이었고,
+마지막 한 번은 부호까지 틀렸다.** 다섯 라운드 동안 홀드아웃은 방향만은 맞혔고 그래서
+채택/기각 판정에만 쓰고 점수 예측에는 쓰지 않았다. v7은 그마저 깨진 라운드다.
 
 전이율이 v5·v6에서 100%를 넘긴 데는 이유가 있다 — 2024 홀드아웃은 F(2군)를
 구조적으로 과소평가한다. 홀드아웃 모델은 새 F 레짐을 2023년 한 해치만 보고 학습하는데
@@ -726,9 +769,27 @@ v7은 1번과 2번의 결합이다. 앙상블은 v6에서 완전히 포화였고
 스태킹까지 전부 기준 아래였다 — 공통점은 **전부 같은 피처 테이블 위에서 모델만 바꿨다**는
 것이었다. 피처 테이블을 두 벌로 나누자 그 축은 포화가 아니었다.
 
-## v7 상태
+## v7은 어떻게 끝났나
 
-학습·패키징·평가 서버 리허설까지 끝난 상태다.
+v7은 2026-09-01 마감 전에 제출했고 **v6을 개선하지 못했다.** 정확한 점수는 기록해 두지
+않았다. v6의 998.53이 그대로 최선으로 남았고 그게 최종 public 결과다. 2024 홀드아웃은
++22.0이라고 말했었다.
+
+이건 분명히 적어야 한다. 이 README는 첫 화면 전체를 "홀드아웃은 크기는 못 믿어도 부호는
+믿을 수 있다"는 주장에 쓰고 있다. 다섯 라운드가 그 주장을 뒷받침했고, 여섯 번째가
+뒷받침하지 않았다. 아래 v7 절은 **잘 측정했지만 실제 평가셋과의 접촉에서 살아남지 못한
+변경**으로 읽어야 한다.
+
+검증되지 않은 가설 두 가지:
+
+- **2024 홀드아웃은 학습 시즌이 5개고 2025는 6개다.** v7의 모든 상수 — 뷰 혼합 0.5,
+  신경망 가중치 0.35, F 전용 0.25 — 는 2024에서 고르고 2022에서 확인한 것이다. 아래 절에
+  이미 적혀 있듯 학습 시즌이 2개뿐인 2021은 −29.8로 반대를 가리켰다. 2021을 반대로 만든
+  그 레짐이 2025에서 완전히 사라지지는 않았을 수 있다.
+- **뷰 B의 이득은 F에 몰려 있었고 F는 전체의 12%다.** F의 전이율은 이 프로젝트에서
+  가장 높았지만(v6에서 237%), 그 패턴이 그냥 소진됐을 수 있다.
+
+검증된 것: 학습·패키징·평가 서버 리허설은 전부 통과했다.
 
 ```
 [OK] artifact loads (15.8 MB), tightA x4 + looseA x4 + tightB x4 + looseB x4
@@ -745,7 +806,7 @@ v7은 1번과 2번의 결합이다. 앙상블은 v6에서 완전히 포화였고
 train.csv 마지막 25만 행의 `season`만 2025로 바꿔 쓰는데, 그 행들의 asof 카운터가
 이미 2024년 말 값이라 시즌 누적이 전원 0으로 붕괴한다. 형식·시간·크래시 점검용이다.
 
-검증까지 끝난 근거:
+홀드아웃과 리허설이 실제로 확인해 준 것:
 - 2024 홀드아웃 端-to-端 917.6 (2시드), v6 895.6 대비 +21.9
 - 2022에서 모든 상수(뷰 혼합 0.5, 신경망 뷰 B, F 전용 w=0.25)가 같은 위치에서 최적
 - 배포되는 `fe.py`가 랩 빌더와 소수점까지 일치 (실험 28의 Aprod/Bprod)
@@ -757,10 +818,22 @@ train.csv 마지막 25만 행의 `season`만 2025로 바꿔 쓰는데, 그 행�
 - **기각된 시도 60여 개** — 각 버전 절의 기각 표, 그리고 `work/lab/00~31`
 - **재현** — 아래 "사용법"
 
-데이터(`open/data/`, 689MB)와 랩 캐시(`work/lab/cache/`)는 저장소에 없다.
-전자는 대회 페이지에서 받고, 후자는 `work/lab/00_cache.py`로 재생성한다.
-중간 버전(v4~v6)의 모델 바이너리도 제외했다 — 각 버전의 `code/`와 `train_v4.py`로
+### 대회 자료는 재배포하지 않는다
+
+`open/` 아래 전부 — 대회 데이터(689MB), 공식 데이터 설명서, 제공된 베이스라인 제출본 —
+는 Dacon / LG Aimers의 제3자 자료다. 이 저장소에서 제외했고, 단순히 추적 해제한 게
+아니라 히스토리에서도 제거했다. [대회 페이지](https://dacon.io/competitions/official/236743)에서
+받으면 되고, 이 저장소의 코드는 `open/data/` 위치를 기대한다.
+
+랩 캐시(`work/lab/cache/`)도 제외했다 — `work/lab/00_cache.py`로 재생성한다.
+중간 버전(v4~v6)의 모델 바이너리도 제외했고, 각 버전의 `code/`와 `train_v4.py`로
 재현된다. 최종 v7 아티팩트는 `submit/`과 `versions/v7/`에 들어 있다.
+
+### 라이선스
+
+이 저장소의 코드는 MIT다 ([LICENSE](LICENSE)). 저장소 자체의 코드와 문서만 해당하며,
+위에 적은 대회 데이터·문서·베이스라인에는 미치지 않는다. 그것들은 여기서 배포하지 않고
+각 소유자의 조건을 따른다.
 
 ## 이 문제의 구조
 
@@ -1208,7 +1281,8 @@ python -m venv .venv-submit
 ## 구조
 
 ```
-open/                     대회 배포본 (data/ 는 git 제외, 689MB)
+open/                     대회 배포본 — 전부 git 제외,
+                          "대회 자료는 재배포하지 않는다" 절 참고
 work/
   fe.py                   피처 엔지니어링 — 학습/검증/제출이 공유하는 유일한 원본
                           extras=False → 뷰 A(107), extras=True → 뷰 B(135).
