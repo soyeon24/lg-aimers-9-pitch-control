@@ -54,9 +54,9 @@ reached the leaderboard varied wildly.
 | v3 → v4 | +87.3 | +24.6 | 28% |
 | v4 → v5 | +34.1 | +37.8 | 111% |
 | v5 → v6 | +5.6 | +13.3 | 237% |
-| v6 → v7 | +22.0 | none | **0%** |
+| v6 → v7 | +22.0 | **−0.28** | **−1%** |
 
-From 20% to 330%, and then zero. **The ratio was never usable, and on the last step the
+From 20% to 330%, and then nothing. **The ratio was never usable, and on the last step the
 sign failed too.** For five rounds the holdout got the direction right and only the
 magnitude wrong, which is why it was used for accept/reject decisions and never to predict
 a score. v7 is the round where even that broke.
@@ -87,16 +87,34 @@ feature table in two showed that axis was not saturated at all.
 
 ## How v7 ended
 
-v7 was submitted before the 2026-09-02 deadline and **did not improve on v6.** The exact
-score was not recorded; v6's 998.53 remained the best and is the final public result. The
-2024 holdout had said +22.0.
+v7 was submitted before the 2026-09-02 deadline and scored **998.2418 against v6's
+998.5260 — a difference of −0.28**, on a scale where v4 → v5 had moved +37.8. Not a
+regression worth the name; simply nothing. The 2024 holdout had said +22.0.
 
 That is worth stating plainly, because this README spends its first screen arguing that the
 holdout's sign can be trusted even when its magnitude cannot. Five rounds supported that.
 The sixth did not. Anyone reading the v7 section below should read it as a well-measured
 change that did not survive contact with the real evaluation set.
 
-Two candidate explanations, neither verified:
+### The warning was there, and it was argued away
+
+[The 2021 holdout](#the-2021-holdout-is-negative--and-it-is-adopted-anyway) said −29.8 for
+the same change, and that section below explains at length why it was discounted: the loss
+was entirely in old-regime F, and 2025 has no such rows. That mechanism was never
+disproved. The conclusion drawn from it — *therefore the gain transfers* — was wrong.
+
+But the lesson is not "2021 was right and should have been believed." **2021 was wrong
+too.** It over-predicted the harm by 29 points exactly as 2024 over-predicted the gain by
+22. The true answer was zero, and neither holdout was near it. What 2021 got right was only
+the sign, and only by accident of direction.
+
+The real signal was that **two holdouts disagreed about the sign**, and that disagreement
+was resolved by argument rather than left standing as an unresolved warning. Five rounds of
+the sign being reliable is what made that feel safe. Given the measurement said one thing
+and the reasoning said another, the reasoning won — and this time the measurement that
+disagreed was the one worth heeding.
+
+Two candidate explanations for the transfer failure itself, neither verified:
 
 - **The 2024 holdout has five training seasons; 2025 has six.** Every constant in v7 —
   the 0.5 view mix, the 0.35 net weight, the 0.25 F weight — was chosen on 2024 and
@@ -745,11 +763,12 @@ v4에서 홀드아웃 하네스를 갈아서 v3 점수가 두 번 찍힌다 — 
 | v3 → v4 | +87.3 | +24.6 | 28% |
 | v4 → v5 | +34.1 | +37.8 | 111% |
 | v5 → v6 | +5.6 | +13.3 | 237% |
-| v6 → v7 | +22.0 | 없음 | **0%** |
+| v6 → v7 | +22.0 | **−0.28** | **−1%** |
 
-20%에서 330%까지 흩어지다가 마지막에 0이 됐다. **비율은 처음부터 못 쓸 물건이었고,
-마지막 한 번은 부호까지 틀렸다.** 다섯 라운드 동안 홀드아웃은 방향만은 맞혔고 그래서
-채택/기각 판정에만 쓰고 점수 예측에는 쓰지 않았다. v7은 그마저 깨진 라운드다.
+20%에서 330%까지 흩어지다가 마지막엔 아무것도 아니게 됐다. **비율은 처음부터 못 쓸
+물건이었고, 마지막 한 번은 부호까지 틀렸다.** 다섯 라운드 동안 홀드아웃은 방향만은
+맞혔고 그래서 채택/기각 판정에만 쓰고 점수 예측에는 쓰지 않았다. v7은 그마저 깨진
+라운드다.
 
 전이율이 v5·v6에서 100%를 넘긴 데는 이유가 있다 — 2024 홀드아웃은 F(2군)를
 구조적으로 과소평가한다. 홀드아웃 모델은 새 F 레짐을 2023년 한 해치만 보고 학습하는데
@@ -775,16 +794,32 @@ v7은 1번과 2번의 결합이다. 앙상블은 v6에서 완전히 포화였고
 
 ## v7은 어떻게 끝났나
 
-v7은 2026-09-02 마감 전에 제출했고 **v6을 개선하지 못했다.** 정확한 점수는 기록해 두지
-않았다. v6의 998.53이 그대로 최선으로 남았고 그게 최종 public 결과다. 2024 홀드아웃은
-+22.0이라고 말했었다.
+v7은 2026-09-02 마감 전에 제출했고 **998.2418**을 받았다. v6이 **998.5260**이니 차이는
+**−0.28**이다. v4 → v5가 +37.8을 움직인 척도에서 −0.28은 하락이라고 부를 것도 못 되는,
+그냥 아무것도 아닌 값이다. 2024 홀드아웃은 +22.0이라고 말했었다.
 
 이건 분명히 적어야 한다. 이 README는 첫 화면 전체를 "홀드아웃은 크기는 못 믿어도 부호는
 믿을 수 있다"는 주장에 쓰고 있다. 다섯 라운드가 그 주장을 뒷받침했고, 여섯 번째가
 뒷받침하지 않았다. 아래 v7 절은 **잘 측정했지만 실제 평가셋과의 접촉에서 살아남지 못한
 변경**으로 읽어야 한다.
 
-검증되지 않은 가설 두 가지:
+### 경고는 있었고, 논증으로 덮었다
+
+[2021 홀드아웃](#2021-홀드아웃은-음수다--그런데-채택한다)은 같은 변경에 −29.8을 찍었고,
+아래 그 절은 왜 그걸 기각했는지를 길게 설명한다 — 손실이 전부 구 레짐 F에서 나오고
+2025에는 그런 행이 없다는 것이다. 그 메커니즘은 지금도 반증되지 않았다. 틀린 건
+거기서 내린 결론, **"그러므로 이득은 전이된다"** 쪽이다.
+
+다만 교훈이 "2021을 믿었어야 했다"는 아니다. **2021도 틀렸다.** 2024가 이득을 22점
+과대예측한 것과 똑같이 2021은 손해를 29점 과대예측했다. 실제 답은 0이었고 두 홀드아웃
+모두 근처에도 못 갔다. 2021이 맞힌 건 부호뿐이고, 그것도 방향이 우연히 맞은 것이다.
+
+진짜 신호는 **두 홀드아웃이 부호에서 갈렸다는 사실 자체**였다. 그런데 그 불일치를
+미해결로 남겨 두지 않고 논증으로 결론냈다. 다섯 라운드 동안 부호가 믿을 만했다는 게
+그걸 안전하게 느끼도록 만들었다. 측정과 논리가 엇갈렸을 때 논리가 이겼고, 이번엔
+엇갈린 쪽 측정이 들어야 할 쪽이었다.
+
+전이 실패 자체에 대한, 검증되지 않은 가설 두 가지:
 
 - **2024 홀드아웃은 학습 시즌이 5개고 2025는 6개다.** v7의 모든 상수 — 뷰 혼합 0.5,
   신경망 가중치 0.35, F 전용 0.25 — 는 2024에서 고르고 2022에서 확인한 것이다. 아래 절에
