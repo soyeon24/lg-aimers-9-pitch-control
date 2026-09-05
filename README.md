@@ -4,7 +4,7 @@
 
 **English** · [한국어](#korean)
 
-[Competition page](https://dacon.io/competitions/official/236743) · Leaderboard closed 2026-09-01 · Code + slides due 2026-09-07
+[Competition page](https://dacon.io/competitions/official/236743) · Ran 2026-08-05 to 2026-09-02 09:59 · Code + slides due 2026-09-07
 
 Predict the probability that a single KBO pitch is a "control success." Train on 1.47M
 pitches from 2019–2024, predict 250,000 pitches from 2025.
@@ -14,10 +14,12 @@ as per-row discrimination. But training is 2019–2024 while evaluation is 2025,
 success rate falls every year — half of this problem is drift correction, not resolution
 (see [The shape of this problem](#the-shape-of-this-problem)).
 
-**Final public leaderboard 998.53 — 437th of 1,087**, up from 897.09 at v1.
-The final score is v6's. v7 was submitted before the deadline and did not beat it, which
-makes it the one time in this project that a holdout gain failed to transfer at all — see
-[How v7 ended](#how-v7-ended).
+**Public leaderboard 897.09 → 998.53** (v1 → v6). **Final private standing: 437th of 1,087.**
+
+The best score is v6's. v7 was submitted before the deadline and did not beat it, which makes
+it the one time in this project that a holdout gain failed to transfer at all — see
+[How v7 ended](#how-v7-ended). Every score quoted below is from the public leaderboard, which
+is what was visible while the work was happening.
 
 Throughout: **R** is `game_type` R, the top-tier KBO league; **F** is Futures, the
 second-tier development league (12% of rows).
@@ -85,7 +87,7 @@ feature table in two showed that axis was not saturated at all.
 
 ## How v7 ended
 
-v7 was submitted before the 2026-09-01 deadline and **did not improve on v6.** The exact
+v7 was submitted before the 2026-09-02 deadline and **did not improve on v6.** The exact
 score was not recorded; v6's 998.53 remained the best and is the final public result. The
 2024 holdout had said +22.0.
 
@@ -699,7 +701,7 @@ silently.
 
 [English](#english) · **한국어**
 
-[대회 페이지](https://dacon.io/competitions/official/236743) · 리더보드 마감 2026-09-01 · 코드+PPT 마감 2026-09-07
+[대회 페이지](https://dacon.io/competitions/official/236743) · 2026-08-05 ~ 2026-09-02 09:59 · 코드+PPT 마감 2026-09-07
 
 KBO 투구 한 건이 "제구 성공"일 확률을 예측한다. 2019~2024 시즌 147만 투구로 학습해
 2025 시즌 25만 투구를 맞히는 문제다.
@@ -708,9 +710,11 @@ KBO 투구 한 건이 "제구 성공"일 확률을 예측한다. 2019~2024 시�
 그런데 학습은 2019~2024이고 평가는 2025인데 성공률이 매년 떨어진다 — 이 문제의 절반은
 해상도가 아니라 드리프트 보정이다 (아래 [이 문제의 구조](#이-문제의-구조)).
 
-**최종 리더보드 Public 998.53 — 1,087명 중 437위.** v1의 897.09에서 올라온 값이다.
-최종 점수는 v6의 것이다. v7은 마감 전에 제출했지만 v6을 넘지 못했고, 이 프로젝트에서
+**리더보드 Public 897.09 → 998.53** (v1 → v6). **최종 Private 순위 1,087팀 중 437위.**
+
+최고 점수는 v6의 것이다. v7은 마감 전에 제출했지만 v6을 넘지 못했고, 이 프로젝트에서
 홀드아웃 이득이 전혀 전이되지 않은 유일한 사례가 됐다 — [v7은 어떻게 끝났나](#v7은-어떻게-끝났나) 참고.
+아래에 나오는 점수는 전부 public 리더보드 기준이다 — 작업하는 동안 실제로 보이던 값이다.
 
 ## 버전 발전사
 
@@ -771,7 +775,7 @@ v7은 1번과 2번의 결합이다. 앙상블은 v6에서 완전히 포화였고
 
 ## v7은 어떻게 끝났나
 
-v7은 2026-09-01 마감 전에 제출했고 **v6을 개선하지 못했다.** 정확한 점수는 기록해 두지
+v7은 2026-09-02 마감 전에 제출했고 **v6을 개선하지 못했다.** 정확한 점수는 기록해 두지
 않았다. v6의 998.53이 그대로 최선으로 남았고 그게 최종 public 결과다. 2024 홀드아웃은
 +22.0이라고 말했었다.
 
